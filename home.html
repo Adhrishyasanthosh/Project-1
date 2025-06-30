@@ -1,0 +1,279 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheckList - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            padding: 2rem;
+            background-image: url("./images/bg.png");
+            background-repeat: repeat;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+
+        }
+        .todo-container {
+            max-width: 600px;
+            margin: auto;
+            align-items: center;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 10px 10px 5px grey;
+            background-color: white;
+            border-radius: 20px;
+        }
+        .sidebar {
+            min-height: 100vh;
+            background-color: #343a40;
+            color: white;
+            padding: 1rem;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 0.5rem 0;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        i{
+            width: 30px;
+            height: 30px;
+        }
+
+    </style>
+</head>
+<body>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-md-3 col-lg-2 sidebar">
+                    <h4>Dashboard</h4>
+                    <a href="#"><i class="fa-solid fa-house"></i> Home</a>
+                    <a href="#"><i class="fa-solid fa-list-check"></i>Tasks</a>
+                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i>Search</a>
+                    <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
+                    <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                </nav>
+
+                <main class="col-md-9 col-lg-10 p-4">
+                    <h1>Welcome to Your Checklist</h1>
+                    <div class="input-group mb-3">
+                    <input type="text" id="taskInput" class="form-control" placeholder="Enter a new task" />
+                    <button class="btn btn-primary" onclick="addTask()"><i class="fa-solid fa-plus"></i>Add</button>
+                    </div>
+                    <ul id="taskList" class="list-group"></ul>
+                </main>
+            </div>
+            
+        </div>
+
+        <div class="container-fluid">
+            <div class="task">
+                <h1>Completed task</h1>
+                <ul id="completedTask" class="list-group"></ul>
+                <button class="btn btn-danger" onclick="deleteBtn"><i class="fa-solid fa-trash">Delete</i></button>
+            </div>
+        </div>
+
+        <script>
+            const userName = localStorage.getItem("userName");
+            if (userName) {
+                document.getElementById("greeting").textContent = `Welcome, ${userName}!`;
+            }
+
+            function addTask() {
+                const taskInput = document.getElementById("taskInput");
+                const taskText = taskInput.value.trim();
+                if (taskText === "") return;
+
+                const li = document.createElement("li");
+                li.className = "list-group-item d-flex justify-content-between align-items-center";
+                li.textContent = taskText;
+
+                const deleteBtn = document.createElement("button");
+                deleteBtn.className = "btn btn-sm btn-danger";
+                deleteBtn.textContent = "Delete";
+                deleteBtn.onclick = () => li.remove();
+
+                li.appendChild(deleteBtn);
+                document.getElementById("taskList").appendChild(li);
+                taskInput.value = "";
+                localStorage.setItem("userName", name);
+
+            }
+            function saveCompletedTask(task) {
+                let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+                completedTasks.push(task);
+                localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+                // completeBtn.onclick = () => {
+                // saveCompletedTask(taskText);
+                // li.remove();
+                // };
+            }
+
+            function logout() {
+                localStorage.removeItem("userName");
+                localStorage.removeItem("SignedUp"); 
+                window.location.href = "index.html";
+}
+
+
+        </script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CheckList - Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body {
+      padding: 2rem;
+      background-image: url("./images/bg.png");
+      background-repeat: repeat;
+      min-height: 100vh;
+      background-color: #f8f9fa;
+    }
+    .todo-container {
+      max-width: 600px;
+      margin: auto;
+      align-items: center;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 10px 10px 5px grey;
+      background-color: white;
+      border-radius: 20px;
+    }
+    .sidebar {
+      min-height: 100vh;
+      background-color: #343a40;
+      color: white;
+      padding: 1rem;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 0.5rem 0;
+    }
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+    i {
+      width: 30px;
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-3 col-lg-2 sidebar">
+        <h4>Dashboard</h4>
+        <a href="#"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#"><i class="fa-solid fa-list-check"></i>Tasks</a>
+        <a href="#"><i class="fa-solid fa-magnifying-glass"></i>Search</a>
+        <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
+        <a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+      </nav>
+
+      <main class="col-md-9 col-lg-10 p-4">
+        <h1 id="greeting">Welcome to Your Checklist</h1>
+
+        <div class="input-group mb-3">
+          <input type="text" id="taskInput" class="form-control" placeholder="Enter a new task" />
+          <button class="btn btn-primary" onclick="addTask()"><i class="fa-solid fa-plus"></i> Add</button>
+        </div>
+
+        <ul id="taskList" class="list-group mb-5"></ul>
+
+        <h2>Completed Tasks</h2>
+        <ul id="completedTask" class="list-group"></ul>
+        <button class="btn btn-danger mt-3" onclick="clearCompletedTasks()"><i class="fa-solid fa-trash"></i> Clear Completed</button>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user && user.name) {
+      document.getElementById("greeting").textContent = `Welcome, ${user.name}!`;
+    }
+
+    window.onload = () => {
+      let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+      completedTasks.forEach(task => {
+        addCompletedTaskToDOM(task);
+      });
+    };
+
+    function addTask() {
+      const taskInput = document.getElementById("taskInput");
+      const taskText = taskInput.value.trim();
+      if (!taskText) return;
+
+      const li = document.createElement("li");
+      li.className = "list-group-item d-flex justify-content-between align-items-center";
+
+      const span = document.createElement("span");
+      span.textContent = taskText;
+
+      const completeBtn = document.createElement("button");
+      completeBtn.className = "btn btn-sm btn-success me-2";
+      completeBtn.textContent = "Done";
+      completeBtn.onclick = () => {
+        saveCompletedTask(taskText);
+        addCompletedTaskToDOM(taskText);
+        li.remove();
+      };
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.className = "btn btn-sm btn-danger";
+      deleteBtn.textContent = "Delete";
+      deleteBtn.onclick = () => li.remove();
+
+      const btnGroup = document.createElement("div");
+      btnGroup.appendChild(completeBtn);
+      btnGroup.appendChild(deleteBtn);
+
+      li.appendChild(span);
+      li.appendChild(btnGroup);
+
+      document.getElementById("taskList").appendChild(li);
+      taskInput.value = "";
+    }
+
+    function saveCompletedTask(task) {
+      let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+      completedTasks.push(task);
+      localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+    }
+
+    function addCompletedTaskToDOM(taskText) {
+      const li = document.createElement("li");
+      li.className = "list-group-item d-flex justify-content-between align-items-center text-muted";
+      li.textContent = taskText;
+      document.getElementById("completedTask").appendChild(li);
+    }
+
+    function clearCompletedTasks() {
+      localStorage.removeItem("completedTasks");
+      document.getElementById("completedTask").innerHTML = "";
+    }
+
+    function logout() {
+      localStorage.removeItem("user");
+      localStorage.removeItem("completedTasks");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
